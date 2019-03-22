@@ -1,8 +1,9 @@
-package com.company.Model;
+package Model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
-@SuppressWarnings("Duplicates")
+@XmlRootElement(name = "handlowiec")
 public class Handlowiec extends IPracownik {
     protected BigDecimal Commision;
     protected BigDecimal commisionMonthlyLimit;

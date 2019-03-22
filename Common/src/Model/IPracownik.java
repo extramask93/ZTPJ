@@ -1,8 +1,9 @@
-package com.company.Model;
-
+package Model;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
-
-public class IPracownik {
+@XmlRootElement(name = "ipracownik")
+public class IPracownik
+{
     protected String Pesel;
     protected String FirstName;
     protected String LastName;
@@ -48,7 +49,6 @@ public class IPracownik {
         PhoneNumber = phoneNumber;
         JobTitle = jobTitle;
     }
-
     public String getPesel() {
         return Pesel;
     }
@@ -56,7 +56,6 @@ public class IPracownik {
     public void setPesel(String pesel) {
         Pesel = pesel;
     }
-
     public String getFirstName() {
         return FirstName;
     }

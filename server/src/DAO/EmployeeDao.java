@@ -1,10 +1,10 @@
-package com.company.Controller.DAO;
+package DAO;
 
-import com.company.Controller.ConnectionPool.BasicConnectionPool;
-import com.company.Model.Dyrektor;
-import com.company.Model.Handlowiec;
-import com.company.Model.IPracownik;
-import com.company.Model.JobTitleType;
+import ConnectionPool.BasicConnectionPool;
+import Model.Dyrektor;
+import Model.Handlowiec;
+import Model.IPracownik;
+import Model.JobTitleType;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
@@ -87,7 +87,6 @@ public class EmployeeDao implements IEmployeeDao {
         }
         return pracownicy;
     }
-
     @Override
     public void addEmployee(IPracownik employee) throws SQLException, IOException {
         Connection conn = null;
@@ -125,7 +124,7 @@ public class EmployeeDao implements IEmployeeDao {
         }
     }
     protected IPracownik createEmployee(ResultSet set) throws SQLException {
-        var type = set.getInt("stanowisko");
+        int type = set.getInt("stanowisko");
         IPracownik handlowiec = null;
         switch (type) {
             case 0: /*Handlowiec*/

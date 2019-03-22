@@ -1,6 +1,6 @@
-package com.company.Controller.DAO;
+package DAO;
 
-import com.company.Model.IPracownik;
+import Model.IPracownik;
 
 import java.io.IOException;
 import java.sql.SQLException;

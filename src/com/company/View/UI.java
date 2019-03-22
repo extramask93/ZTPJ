@@ -1,11 +1,13 @@
 package com.company.View;
 import com.company.Controller.MasterController;
-import com.company.Model.Dyrektor;
-import com.company.Model.Handlowiec;
-import com.company.Model.IPracownik;
-import com.company.Model.JobTitleType;
+import Model.Dyrektor;
+import Model.Handlowiec;
+import Model.IPracownik;
+import Model.JobTitleType;
+import javafx.util.Pair;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -14,8 +16,7 @@ public class UI {
         this.controller = controller;
     }
     private MasterController controller;
-    public void Run()
-    {
+    public void Run() throws IOException, SQLException {
         int choice = 0;
         while(choice != 4) {
             choice = printMenu();
@@ -33,7 +34,7 @@ public class UI {
                 case 2:
                 {
                     try {
-                        var employee = getEmplyee();
+                        IPracownik employee = getEmplyee();
                         controller.addEmployee(employee);
                     }
                     catch (Exception e) {
@@ -56,12 +57,36 @@ public class UI {
                     /*Quit*/
                     break;
                 }
+                case 5:
+                {
+                    Pair<String, Integer> ipAndPort =  getIpAndPort();
+                    HashMap<String,IPracownik> a = controller.getRemoteEmployees(ipAndPort.getKey(), ipAndPort.getValue());
+                    System.out.print("Czy zapisac dane? [T]/[N] : ");
+                    Scanner sc = new Scanner(System.in);
+                    char odp = (char) sc.nextByte();
+                    if(odp == 'T') {
+                        System.out.print("Zapisywanie...");
+                        for(IPracownik pracownik : a.values()) {
+                            controller.addEmployee(pracownik);
+                        }
+                    }
+                    break;
+                }
                 default:
                     break;
             }
         }
     }
-
+    private Pair<String,Integer> getIpAndPort() {
+        String ip;
+        Integer port;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Adres : ");
+        ip = sc.nextLine();
+        System.out.print("Port : ");
+        port = sc.nextInt();
+        return new Pair<String, Integer>(ip,port);
+    }
     private String getPesel() {
         System.out.print("Podaj pesel: ");
         Scanner sc = new Scanner(System.in);
@@ -70,7 +95,7 @@ public class UI {
 
     public void printEmplyess(HashMap<String, IPracownik> pracownicy) {
         Scanner scanner = new Scanner(System.in);
-        var keys = pracownicy.keySet().toArray();
+        String[] keys =   pracownicy.keySet().toArray(new String[0]);
         int index = 0;
         char choice = '\r';
         while(choice != 'Q') {
@@ -90,6 +115,8 @@ public class UI {
         System.out.println("\t 2. Dodaj pracownika");
         System.out.println("\t 3. Usun pracownika");
         System.out.println("\t 4. Kopia zapasowa");
+        System.out.println("\t 5. Pobierz dane z sieci");
+        System.out.println("\t 6. Wyjscie");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }

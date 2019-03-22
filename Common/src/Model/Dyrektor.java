@@ -1,7 +1,7 @@
-package com.company.Model;
-
+package Model;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
-
+@XmlRootElement(name = "dyrektor")
 public class Dyrektor extends IPracownik {
     private String CardNumber;
     private BigDecimal ExpansesLimit;
