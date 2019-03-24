@@ -1,15 +1,12 @@
 package DAO;
 
 import ConnectionPool.BasicConnectionPool;
-import Model.Dyrektor;
-import Model.Handlowiec;
-import Model.IPracownik;
-import Model.JobTitleType;
+import Model.*;
+
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
 
-public class EmployeeDao implements IEmployeeDao {
+public class DatabaseDao implements IEmployeeDao {
     protected static BasicConnectionPool pool = null;
     protected String  deleteString = "DELETE FROM PRACOWNICY WHERE PESEL = ?";
     protected String  updateString = "INSERT INTO PRACOWNICY" +
@@ -18,19 +15,19 @@ public class EmployeeDao implements IEmployeeDao {
             " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     protected String getAllString = "SELECT * from PRACOWNICY";
 
-    public EmployeeDao() throws SQLException, IOException {
+    public DatabaseDao() throws SQLException, IOException {
         if(pool == null) {
             pool = BasicConnectionPool.create();
         }
     }
     @Override
-    public void deleteEmployee(String pesel) throws SQLException, IOException {
+    public void deleteEmployee(IPracownik pracownik) throws SQLException, IOException {
         Connection conn = null;
         PreparedStatement deleteStatement = null;
         try {
             conn = pool.getConnection();
             deleteStatement = conn.prepareStatement(deleteString);
-            deleteStatement.setString(1,pesel);
+            deleteStatement.setString(1,pracownik.getPesel());
             deleteStatement.executeUpdate();
             conn.commit();
             deleteStatement.close();
@@ -54,8 +51,8 @@ public class EmployeeDao implements IEmployeeDao {
         }
     }
     @Override
-    public HashMap<String, IPracownik> getAllEmployees() throws SQLException, IOException {
-        HashMap<String, IPracownik> pracownicy = null;
+    public IPracownikList getAllEmployees() throws SQLException, IOException {
+        IPracownikList pracownicy = null;
         Connection conn = null;
         ResultSet result;
         PreparedStatement stat = null;
@@ -150,10 +147,10 @@ public class EmployeeDao implements IEmployeeDao {
         handlowiec.setSalaryAddition(set.getBigDecimal("dodatek"));
         return handlowiec;
     }
-    protected HashMap<String,IPracownik> employeeFactory(ResultSet set) throws SQLException {
-        HashMap<String,IPracownik> employees = new HashMap<String, IPracownik>();
+    protected IPracownikList employeeFactory(ResultSet set) throws SQLException {
+        IPracownikList employees = new IPracownikList();
         while(set.next()) {
-            employees.putIfAbsent(set.getString("PESEL"),createEmployee(set));
+            employees.getList().add(createEmployee(set));
         }
         return employees;
     }

@@ -1,8 +1,9 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 
-public class Mainn {
+public class Main {
 
     public static void main(String[] args) {
 
@@ -17,6 +18,8 @@ public class Mainn {
                 i++;
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

@@ -1,9 +1,6 @@
 package com.company.View;
+import Model.*;
 import com.company.Controller.MasterController;
-import Model.Dyrektor;
-import Model.Handlowiec;
-import Model.IPracownik;
-import Model.JobTitleType;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -46,7 +43,9 @@ public class UI {
                 {
                     try {
                         String result = getPesel();
-                        controller.removeEmployee(result);
+                        IPracownik pr = new IPracownik();
+                        pr.setPesel(result);
+                        controller.removeEmployee(pr);
                     }
                     catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -60,10 +59,10 @@ public class UI {
                 case 5:
                 {
                     Pair<String, Integer> ipAndPort =  getIpAndPort();
-                    HashMap<String,IPracownik> a = controller.getRemoteEmployees(ipAndPort.getKey(), ipAndPort.getValue());
+                    HashMap<String,IPracownik> a = controller.tcpController.getRemoteEmployees(ipAndPort.getKey(), ipAndPort.getValue());
                     System.out.print("Czy zapisac dane? [T]/[N] : ");
                     Scanner sc = new Scanner(System.in);
-                    char odp = (char) sc.nextByte();
+                    char odp = (char) sc.nextLine().charAt(0);
                     if(odp == 'T') {
                         System.out.print("Zapisywanie...");
                         for(IPracownik pracownik : a.values()) {
@@ -93,19 +92,18 @@ public class UI {
         return sc.nextLine();
     }
 
-    public void printEmplyess(HashMap<String, IPracownik> pracownicy) {
+    public void printEmplyess(IPracownikList pracownicy) {
         Scanner scanner = new Scanner(System.in);
-        String[] keys =   pracownicy.keySet().toArray(new String[0]);
         int index = 0;
         char choice = '\r';
         while(choice != 'Q') {
             System.out.println("1. Lista pracownikow");
-            if(index < pracownicy.size()) System.out.print(pracownicy.get(keys[index]));
-            System.out.printf("[Pozycja : %d/%d]\n",index+1,pracownicy.size());
+            if(index < pracownicy.getList().size()) System.out.print(pracownicy.getList().get(index));
+            System.out.printf("[Pozycja : %d/%d]\n",index+1,pracownicy.getList().size());
             System.out.println("[Enter] : nastepny");
             System.out.println("[Q] : powrot");
             String response = scanner.nextLine();
-            if(response.isEmpty()) {index = (++index) % (keys.length);}
+            if(response.isEmpty()) {index = (++index) % (pracownicy.getList().size());}
             else {choice = response.charAt(0);}
         }
     }

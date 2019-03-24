@@ -95,5 +95,12 @@ public class IPracownik
     public void setJobTitle(JobTitleType jobTitle) {
         JobTitle = jobTitle;
     }
+    public boolean equals(Object obj) {
+        if (obj != null && getClass() == obj.getClass()) {
+            IPracownik q = (IPracownik) obj;
+            return getPesel() == q.getPesel();
+        }
+        return false;
+    }
 }
 
