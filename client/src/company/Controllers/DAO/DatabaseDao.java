@@ -1,6 +1,6 @@
 package company.Controllers.DAO;
 
-import company.Networking.ConnectionPool.BasicConnectionPool;
+import company.Controllers.DAO.ConnectionPool.BasicConnectionPool;
 import company.Models.*;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class DatabaseDao implements IEmployeeDao {
         }
     }
     @Override
-    public void deleteEmployee(IPracownik pracownik) throws SQLException, IOException {
+    public void deleteEmployee(Pracownik pracownik) throws SQLException, IOException {
         Connection conn = null;
         PreparedStatement deleteStatement = null;
         try {
@@ -51,8 +51,8 @@ public class DatabaseDao implements IEmployeeDao {
         }
     }
     @Override
-    public IPracownikList getAllEmployees() throws SQLException, IOException {
-        IPracownikList pracownicy = null;
+    public PracownikList getAllEmployees() throws SQLException, IOException {
+        PracownikList pracownicy = null;
         Connection conn = null;
         ResultSet result;
         PreparedStatement stat = null;
@@ -85,7 +85,7 @@ public class DatabaseDao implements IEmployeeDao {
         return pracownicy;
     }
     @Override
-    public void addEmployee(IPracownik employee) throws SQLException, IOException {
+    public void addEmployee(Pracownik employee) throws SQLException, IOException {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
@@ -120,9 +120,9 @@ public class DatabaseDao implements IEmployeeDao {
                 pool.releaseConnection(conn);
         }
     }
-    protected IPracownik createEmployee(ResultSet set) throws SQLException {
+    protected Pracownik createEmployee(ResultSet set) throws SQLException {
         int type = set.getInt("stanowisko");
-        IPracownik handlowiec = null;
+        Pracownik handlowiec = null;
         switch (type) {
             case 0: /*Handlowiec*/
                 handlowiec = new Handlowiec();
@@ -147,14 +147,14 @@ public class DatabaseDao implements IEmployeeDao {
         handlowiec.setSalaryAddition(set.getBigDecimal("dodatek"));
         return handlowiec;
     }
-    protected IPracownikList employeeFactory(ResultSet set) throws SQLException {
-        IPracownikList employees = new IPracownikList();
+    protected PracownikList employeeFactory(ResultSet set) throws SQLException {
+        PracownikList employees = new PracownikList();
         while(set.next()) {
             employees.getList().add(createEmployee(set));
         }
         return employees;
     }
-    public PreparedStatement addPracownik(PreparedStatement updateStatement,IPracownik employee) throws SQLException {
+    public PreparedStatement addPracownik(PreparedStatement updateStatement, Pracownik employee) throws SQLException {
         updateStatement.setString(2,employee.getPesel());
         updateStatement.setString(3,employee.getFirstName());
         updateStatement.setString(4, employee.getLastName());
@@ -162,7 +162,7 @@ public class DatabaseDao implements IEmployeeDao {
         updateStatement.setString(6,employee.getPhoneNumber());
         return updateStatement;
     }
-    public PreparedStatement addHandlowiec(PreparedStatement updateStatement,IPracownik employee_) throws SQLException,IOException {
+    public PreparedStatement addHandlowiec(PreparedStatement updateStatement, Pracownik employee_) throws SQLException,IOException {
             updateStatement =  addPracownik(updateStatement,employee_);
             Handlowiec employee = (Handlowiec) employee_;
             updateStatement.setNull(7,Types.DECIMAL);
@@ -173,7 +173,7 @@ public class DatabaseDao implements IEmployeeDao {
             updateStatement.executeUpdate();
         return updateStatement;
     }
-    public PreparedStatement addDyrektor(PreparedStatement updateStatement, IPracownik employee_)
+    public PreparedStatement addDyrektor(PreparedStatement updateStatement, Pracownik employee_)
             throws SQLException, IOException {
             updateStatement =  addPracownik(updateStatement,employee_);
             Dyrektor employee = (Dyrektor) employee_;

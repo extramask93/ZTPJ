@@ -1,8 +1,7 @@
 package company.Networking.NetworkConnectors;
 
-import company.Models.IPracownikList;
+import company.Models.PracownikList;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
@@ -11,5 +10,5 @@ public interface INetworkConnector {
     void close();
     boolean authenticate(String login, String password);
     boolean needAuthentication();
-    IPracownikList obtainEmployees() throws JAXBException;
+    PracownikList obtainEmployees() throws Exception;
 }

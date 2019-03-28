@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.rmi.Remote;
 
 @XmlRootElement(name = "ipracownik")
-public class IPracownik implements Serializable, Remote {
+public class Pracownik implements Serializable, Remote {
     protected String Pesel;
     protected String FirstName;
     protected String LastName;
@@ -34,7 +34,7 @@ public class IPracownik implements Serializable, Remote {
         SalaryAddition = salaryAddition;
     }
 
-    public IPracownik() {
+    public Pracownik() {
         Pesel = "";
         FirstName = "";
         LastName = "";
@@ -43,7 +43,7 @@ public class IPracownik implements Serializable, Remote {
         JobTitle = JobTitleType.Handlowiec;
     }
 
-    public IPracownik(String pesel, String firstName, String lastName, BigDecimal salary, String phoneNumber, JobTitleType jobTitle) {
+    public Pracownik(String pesel, String firstName, String lastName, BigDecimal salary, String phoneNumber, JobTitleType jobTitle) {
         Pesel = pesel;
         FirstName = firstName;
         LastName = lastName;
@@ -97,10 +97,11 @@ public class IPracownik implements Serializable, Remote {
     public void setJobTitle(JobTitleType jobTitle) {
         JobTitle = jobTitle;
     }
+    @Override
     public boolean equals(Object obj) {
-        if (obj != null && getClass() == obj.getClass()) {
-            IPracownik q = (IPracownik) obj;
-            return getPesel() == q.getPesel();
+        if (obj != null) {
+            Pracownik q = (Pracownik) obj;
+            return getPesel().equals(q.getPesel());
         }
         return false;
     }

@@ -1,21 +1,14 @@
 package company;
-import company.Controllers.DAO.IEmployeeDao;
-import company.Controllers.DAO.ListDao;
-import company.Controllers.MasterController;
-import company.Networking.NetworkConnectors.INetworkConnector;
-import company.Networking.NetworkConnectors.RMINetworkConnector;
-import company.View.UI;
+
+import company.View.Views.MainView;
 
 
 public class Main {
     public static void main(String[] args) {
 
             try {
-                IEmployeeDao dao = new ListDao();
-                INetworkConnector connector = new RMINetworkConnector();
-                MasterController controller = new MasterController(dao,connector);
-                UI ui = new UI(controller);
-                ui.Run();
+                MainView view = new MainView();
+                view.run();
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());

@@ -7,27 +7,27 @@ import java.util.HashMap;
 import java.util.List;
 @XmlRootElement(name="ipracownikList")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class IPracownikList implements Serializable, Remote {
+public class PracownikList implements Serializable, Remote {
     @XmlElements(@XmlElement(name="ipracownik"))
-    List<IPracownik> list = new ArrayList<>();
-    public IPracownikList() {
+    List<Pracownik> list = new ArrayList<>();
+    public PracownikList() {
     }
-    public HashMap<String, IPracownik> toHashMap() {
-        HashMap<String, IPracownik> map = new HashMap<>();
-        for(IPracownik elem : list) {
+    public HashMap<String, Pracownik> toHashMap() {
+        HashMap<String, Pracownik> map = new HashMap<>();
+        for(Pracownik elem : list) {
             map.putIfAbsent(elem.getPesel(),elem);
         }
         return map;
     }
-    public IPracownikList(List<IPracownik> list) {
+    public PracownikList(List<Pracownik> list) {
         this.list = list;
     }
 
-    public List<IPracownik> getList() {
+    public List<Pracownik> getList() {
         return list;
     }
 
-    public void setList(List<IPracownik> list) {
+    public void setList(List<Pracownik> list) {
         this.list = list;
     }
 }

@@ -1,7 +1,7 @@
 package company.Controllers;
-import company.Models.IPracownikList;
+import company.Models.PracownikList;
 import company.Controllers.DAO.IEmployeeDao;
-import company.Models.IPracownik;
+import company.Models.Pracownik;
 import company.Networking.NetworkConnectors.INetworkConnector;
 
 import java.io.*;
@@ -9,23 +9,23 @@ import java.sql.SQLException;
 
 
 public class MasterController {
-    private IPracownikList pracownicy = null;
+    private PracownikList pracownicy = null;
     private IEmployeeDao dao = null;
     public NetworkController networkController = null;
     public MasterController(IEmployeeDao dao, INetworkConnector connector)
     {
         this.networkController = new NetworkController(connector);
-        this.pracownicy = new IPracownikList();
+        this.pracownicy = new PracownikList();
         this.dao = dao;
     }
-    public void addEmployee(IPracownik employee) throws IOException, SQLException {
+    public void addEmployee(Pracownik employee) throws IOException, SQLException {
             dao.addEmployee(employee);
     }
-    public IPracownikList getEmployees() throws IOException, SQLException {
+    public PracownikList getEmployees() throws IOException, SQLException {
         pracownicy = dao.getAllEmployees();
         return pracownicy;
     }
-    public void removeEmployee(IPracownik pracownik_) throws IOException, SQLException {
+    public void removeEmployee(Pracownik pracownik_) throws IOException, SQLException {
             dao.deleteEmployee(pracownik_);
     }
 }

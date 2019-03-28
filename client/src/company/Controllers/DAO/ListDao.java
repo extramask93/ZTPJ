@@ -1,29 +1,29 @@
 package company.Controllers.DAO;
 
-import company.Models.IPracownik;
-import company.Models.IPracownikList;
+import company.Models.Pracownik;
+import company.Models.PracownikList;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class ListDao implements IEmployeeDao {
-    IPracownikList list  = null;
+    PracownikList list  = null;
     public ListDao() {
-        list = new IPracownikList();
+        list = new PracownikList();
     }
 
     @Override
-    public IPracownikList getAllEmployees() throws SQLException, IOException {
+    public PracownikList getAllEmployees() throws SQLException, IOException {
         return list;
     }
 
     @Override
-    public void addEmployee(IPracownik employee) throws SQLException, IOException {
+    public void addEmployee(Pracownik employee) throws SQLException, IOException {
         list.getList().add(employee);
     }
 
     @Override
-    public void deleteEmployee(IPracownik employee) throws SQLException, IOException {
+    public void deleteEmployee(Pracownik employee) throws SQLException, IOException {
         list.getList().remove(employee);
     }
 }

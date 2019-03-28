@@ -1,4 +1,4 @@
-package company.Networking.ConnectionPool;
+package company.Controllers.DAO.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;

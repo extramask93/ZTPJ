@@ -1,13 +1,13 @@
 package company.Controllers.DAO;
 
-import company.Models.IPracownik;
-import company.Models.IPracownikList;
+import company.Models.Pracownik;
+import company.Models.PracownikList;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public interface IEmployeeDao {
-    IPracownikList getAllEmployees() throws SQLException, IOException;
-    void addEmployee(IPracownik employee) throws  SQLException, IOException;
-    void deleteEmployee(IPracownik employee) throws SQLException, IOException;
+    PracownikList getAllEmployees() throws SQLException, IOException;
+    void addEmployee(Pracownik employee) throws  SQLException, IOException;
+    void deleteEmployee(Pracownik employee) throws SQLException, IOException;
 }

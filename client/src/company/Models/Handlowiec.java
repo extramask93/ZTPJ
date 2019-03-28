@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
 @XmlRootElement(name = "handlowiec")
-public class Handlowiec extends IPracownik {
+public class Handlowiec extends Pracownik {
     protected BigDecimal Commision;
     protected BigDecimal commisionMonthlyLimit;
 
