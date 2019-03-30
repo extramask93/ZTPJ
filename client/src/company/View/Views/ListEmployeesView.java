@@ -1,5 +1,5 @@
 package company.View.Views;
-import company.Models.PracownikList;
+import Models.PracownikList;
 import company.View.Cnt;
 
 import java.io.IOException;

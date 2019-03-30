@@ -1,7 +1,7 @@
 package company.Controllers;
 
 
-import company.Networking.NetworkConnectors.INetworkConnector;
+import company.Networking.INetworkConnector;
 
 public class NetworkController {
     INetworkConnector connector = null;

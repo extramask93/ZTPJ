@@ -1,8 +1,8 @@
 package company.View;
 
-import company.Controllers.DAO.ListDao;
+import DAO.ListDao;
 import company.Controllers.MasterController;
-import company.Networking.NetworkConnectors.TCPNetworkConnector;
+import company.Networking.TCPNetworkConnector;
 
 public class Cnt {
     static MasterController controller = null;

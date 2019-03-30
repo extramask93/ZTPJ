@@ -1,9 +1,9 @@
 package company.View.Views;
 
-import company.Models.Dyrektor;
-import company.Models.Handlowiec;
-import company.Models.Pracownik;
-import company.Models.JobTitleType;
+import Models.Dyrektor;
+import Models.Handlowiec;
+import Models.Pracownik;
+import Models.JobTitleType;
 import company.View.Cnt;
 
 import java.io.IOException;

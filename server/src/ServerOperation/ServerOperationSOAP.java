@@ -1,6 +1,8 @@
 package ServerOperation;
-import Tools.AccessorClass;
-import Tools.RMIService;
+import Const.Constants;
+import DAO.IEmployeeDao;
+import RMI.RMIService;
+import SOAP.SOAPAccessorClass;
 
 import javax.xml.ws.Endpoint;
 import java.rmi.RemoteException;
@@ -8,14 +10,15 @@ import java.util.concurrent.Executors;
 
 
 public class ServerOperationSOAP implements IServerOperation {
-    private static final int RMI_PORT = 2000;
-    public ServerOperationSOAP() throws RemoteException {
-        RMIService.activate(RMI_PORT);
+    private IEmployeeDao dao = null;
+    public ServerOperationSOAP(IEmployeeDao dao) throws RemoteException {
+        RMIService.activate(Constants.RMI_PORT);
+        this.dao = dao;
     }
     @Override
     public void run() {
-        String url = "http://localhost:1212/accessor";
-        Endpoint endpoint = Endpoint.create(new AccessorClass());
+        String url = "http://localhost:"+ Constants.SOAP_PORT +"/"+Constants.SOAP_NAME;
+        Endpoint endpoint = Endpoint.create(new SOAPAccessorClass(dao));
         endpoint.setExecutor(Executors.newFixedThreadPool(5));
         endpoint.publish(url);
         System.out.println("Service started @ " + url);

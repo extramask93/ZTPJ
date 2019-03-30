@@ -1,9 +1,9 @@
 package company.View.Views;
 
-import company.Models.Pracownik;
-import company.Models.PracownikList;
-import company.Networking.NetworkConnectors.SOAPNetworkConnector;
-import company.Networking.NetworkConnectors.TCPNetworkConnector;
+import Models.Pracownik;
+import Models.PracownikList;
+import company.Networking.SOAPNetworkConnector;
+import company.Networking.TCPNetworkConnector;
 import company.View.Cnt;
 import javafx.util.Pair;
 
@@ -97,9 +97,9 @@ public class DownloadDataView implements IView {
         if(console == null) {
             Scanner sc = new Scanner(System.in);
             System.out.print("Username : ");
-            login = sc.nextLine();
+            login = "root";//sc.nextLine();
             System.out.print("Password : ");
-            password = sc.nextLine();
+            password = "root";//sc.nextLine();
         }
         else {
             login = console.readLine("Username: ");
@@ -112,9 +112,9 @@ public class DownloadDataView implements IView {
         Integer port;
         Scanner sc = new Scanner(System.in);
         System.out.print("Adres : ");
-        ip = sc.nextLine();
+        ip = "localhost";//sc.nextLine();
         System.out.print("Port : ");
-        port = sc.nextInt();
+        port = 8198;//sc.nextInt();
         return new Pair<>(ip,port);
     }
 }

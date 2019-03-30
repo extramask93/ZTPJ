@@ -1,8 +1,8 @@
 package company.Controllers;
-import company.Models.PracownikList;
-import company.Controllers.DAO.IEmployeeDao;
-import company.Models.Pracownik;
-import company.Networking.NetworkConnectors.INetworkConnector;
+import DAO.IEmployeeDao;
+import Models.PracownikList;
+import Models.Pracownik;
+import company.Networking.INetworkConnector;
 
 import java.io.*;
 import java.sql.SQLException;

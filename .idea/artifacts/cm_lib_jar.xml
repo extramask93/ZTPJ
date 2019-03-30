@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cm-lib:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cm_lib_jar</output-path>
+    <root id="archive" name="cm-lib.jar">
+      <element id="module-output" name="cm-lib" />
+    </root>
+  </artifact>
+</component>

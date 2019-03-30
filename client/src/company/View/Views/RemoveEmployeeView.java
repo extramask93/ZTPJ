@@ -1,6 +1,6 @@
 package company.View.Views;
 
-import company.Models.Pracownik;
+import Models.Pracownik;
 import company.View.Cnt;
 
 import java.io.IOException;
