@@ -19,7 +19,6 @@ public class BasicConnectionPool implements IConnectionPool {
     private List<Connection> connectionPool;
     private List<Connection> usedConnections = new ArrayList<>();
     private static int INITIAL_POOL_SIZE = 10;
-    private static String CONN_STRING = "jdbc:derby://localhost:1527/COREJAVA;create=true";
     public static BasicConnectionPool create(String propFile) throws SQLException, IOException {
         Properties props = new Properties();
         try (InputStream in = Files.newInputStream(Paths.get(propFile))){
@@ -30,7 +29,7 @@ public class BasicConnectionPool implements IConnectionPool {
         String url = props.getProperty("jdbc.url");
         String username = props.getProperty("jdbc.username");
         String password = props.getProperty("jdbc.password");
-        return BasicConnectionPool.create(CONN_STRING,username,password);
+        return BasicConnectionPool.create(url,username,password);
     }
     public static BasicConnectionPool create(
             String url, String user,

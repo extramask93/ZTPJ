@@ -12,6 +12,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="cm-lib" />
+    <orderEntry type="module" module-name="cm-lib" exported="" />
+    <orderEntry type="library" exported="" name="derbyclient" level="project" />
   </component>
 </module>

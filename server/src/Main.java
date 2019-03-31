@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             IEmployeeDao dao = new DatabaseDao("database.properties");
-            operation = new ServerOperationTCP(dao);
+            operation = new ServerOperationSOAP(dao); //change here
             operation.run();
         } catch (Exception e) {
             e.printStackTrace();

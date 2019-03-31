@@ -154,6 +154,7 @@ public class DatabaseDao implements IEmployeeDao {
         return employees;
     }
     public PreparedStatement addPracownik(PreparedStatement updateStatement, Pracownik employee) throws SQLException {
+        updateStatement.setInt(1,employee.getJobTitle().ordinal());
         updateStatement.setString(2,employee.getPesel());
         updateStatement.setString(3,employee.getFirstName());
         updateStatement.setString(4, employee.getLastName());
@@ -169,7 +170,6 @@ public class DatabaseDao implements IEmployeeDao {
             updateStatement.setNull(9,Types.DECIMAL);
             updateStatement.setBigDecimal(10,employee.getCommision());
             updateStatement.setBigDecimal(11,employee.getCommisionMonthlyLimit());
-            updateStatement.executeUpdate();
         return updateStatement;
     }
     public PreparedStatement addDyrektor(PreparedStatement updateStatement, Pracownik employee_)

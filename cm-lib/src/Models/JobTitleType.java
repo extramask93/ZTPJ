@@ -1,6 +1,6 @@
 package Models;
 
 public enum JobTitleType {
-    Dyrektor, Handlowiec
+    Handlowiec,Dyrektor
 
 }
